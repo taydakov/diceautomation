@@ -2,6 +2,8 @@ var ccText = "Hi<contact name>,\n\n" +
 "I'm a great fit for the position \"<position title>\" because of my 4 years experience with web technologies including frontend and backend. I've got a lot of experience on server side with PHP stack and Apache+Nginx servers. Developed web apps using HTML5, CSS3, JavaScript with jQuery and MVC framework AngularJS, familiar with Chrome DevTools including profiler.\n\n" +
 "I'm looking forward to add value to <company name>!";
 
+var archiveText = "<company name> (<position name>) - \"<contact name>\"\n<url>";
+
 // var emailText = "Hi<contact name>,\n\n" +
 // "I found out that you need a web developer.\n" +
 // "I'm a great fit for the position \"<position title>\" because of my 4 years experience with web technologies including frontend and backend. I've got a lot of experience on server side with PHP stack and Apache+Nginx servers. Developed web apps using HTML5, CSS3, JavaScript with jQuery and MVC framework AngularJS, familiar with Chrome DevTools including profiler.\n\n" +
@@ -45,7 +47,11 @@ function checkData() {
 	}
 }
 
-function prepareText() {
+function prepareData() {
+}
+
+function prepareCCText() {
+	var contactName = this.contactName;
 	if (contactName !== "") {
 		if (contactName.indexOf(" ") !== -1)
 			contactName = contactName.substr(0, contactName.indexOf(" "));
@@ -59,8 +65,19 @@ function prepareText() {
 	$("textarea#coverLetterText").val(ccText);
 }
 
+function prepareArchiveText() {
+	archiveText = archiveText.replace("<company name>",  companyName);
+	archiveText = archiveText.replace("<position name>", jobTitle);
+	archiveText = archiveText.replace("<contact name>",  contactName);
+	archiveText = archiveText.replace("<url>",           document.URL);
+
+	copyToClipboard(archiveText);
+}
+
 $(document).ready(function(){
 	gatherData();
 	checkData();
-	prepareText();
+	prepareData();
+	prepareCCText();
+	prepareArchiveText();
 });
