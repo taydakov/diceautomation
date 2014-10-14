@@ -15,7 +15,7 @@ var contactName,
 	jobDesc,
 
 	emailRegex,
-	emailAvailable;
+	emailInDesc;
 
 function copyToClipboard(text) {
   window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
@@ -28,7 +28,7 @@ function gatherData() {
 	jobDesc     = $("#jobDescription").html().trim();
 
 	emailRegex     = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}\b/gi;
-	emailAvailable = (emailRegex.exec(jobDesc) !== null);
+	emailInDesc    = emailRegex.exec(jobDesc);
 }
 
 function checkData() {
@@ -41,10 +41,10 @@ function checkData() {
 		return;
 	}
 
-	if (emailAvailable) {
-		$("#jobInfo").click();
-		alert("email available in job description.\nTake a look.");
-	}
+	// if (emailAvailable) {
+	// 	$("#jobInfo").click();
+	// 	alert("email available in job description.\nTake a look.");
+	// }
 }
 
 function prepareData() {
@@ -61,6 +61,9 @@ function prepareCCText() {
 		ccText = ccText.replace("<contact name>", "");
 	ccText = ccText.replace("<position title>", jobTitle);
 	ccText = ccText.replace("<company name>",   companyName);
+
+	if (emailInDesc !== null)
+		ccText = "e-mail: " + emailInDesc + "\n\n" + ccText;
 
 	$("textarea#coverLetterText").val(ccText);
 }
