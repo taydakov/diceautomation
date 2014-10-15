@@ -1,5 +1,5 @@
 var ccText = "Hi<contact name>,\n\n" +
-"I'm a great fit for the position \"<position title>\" because of my 4 years experience with web technologies including frontend and backend. I've got a lot of experience on server side with PHP stack and Apache+Nginx servers. Developed web apps using HTML5, CSS3, JavaScript with jQuery and MVC framework AngularJS, familiar with Chrome DevTools including profiler.\n\n" +
+"I'm a great fit for the position \"<position title>\" because of my 4 years experience with web technologies including frontend and backend. I've got a lot of practice on server side with PHP stack and Apache+Nginx servers. Developed web apps using HTML5, CSS3, JavaScript with jQuery and MVC framework AngularJS, familiar with Chrome DevTools including profiler.\n\n" +
 "I'm looking forward to add value to <company name>!";
 
 var archiveText = "<company name> (<position name>) - \"<contact name>\"\n<url>";
@@ -8,6 +8,20 @@ var archiveText = "<company name> (<position name>) - \"<contact name>\"\n<url>"
 // "I found out that you need a web developer.\n" +
 // "I'm a great fit for the position \"<position title>\" because of my 4 years experience with web technologies including frontend and backend. I've got a lot of experience on server side with PHP stack and Apache+Nginx servers. Developed web apps using HTML5, CSS3, JavaScript with jQuery and MVC framework AngularJS, familiar with Chrome DevTools including profiler.\n\n" +
 // "I'm looking forward to add value to <company name>!";
+
+var servedCompanies = [
+	"SUPERMICRO COMPUTER INC",
+	"WinMax Systems Corporation",
+	"Provide Commerce",
+	"Task Management Inc",
+	"Marsh Consulting Services",
+	"Samiti Technology Inc.",
+	"Ascent",
+	"Technosoft Engineering",
+	"Santa Cruz Biotechnology, Inc.",
+	"Global Infotech Corporation",
+	"Elti Solutions",
+];
 
 var contactName,
 	jobTitle,
@@ -39,6 +53,10 @@ function checkData() {
 	if (jobTitle === "" || companyName === "") {
 		alert("CAN'T FIND JOB TITLE OR COMPANY NAME");
 		return;
+	}
+
+	if ($.inArray(companyName, servedCompanies) != -1) {
+		alert("THIS COMPANY HAS ALREADY BEEN SERVED");
 	}
 
 	// if (emailAvailable) {
