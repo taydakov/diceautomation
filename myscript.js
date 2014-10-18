@@ -11,7 +11,7 @@ var archiveText = "<company name> (<position name>) - \"<contact name>\"\n<url>"
 
 var servedCompanies = [
 	"SUPERMICRO COMPUTER INC",
-	"WinMax Systems Corporation",
+	"WinMax Systems Corporation",    // <- first serious contact
 	"Provide Commerce",
 	"Task Management Inc",
 	"Marsh Consulting Services",
@@ -20,7 +20,12 @@ var servedCompanies = [
 	"Technosoft Engineering",
 	"Santa Cruz Biotechnology, Inc.",
 	"Global Infotech Corporation",
-	"Elti Solutions",
+	"Elti Solutions",                 // <- my favorite (russians are here)
+	"Spruce Technology Inc.",
+	"Adept Solutions Inc",
+	"MindWorld LLC",
+	"SMCI",
+	"Skyrocket Ventures",
 ];
 
 var contactName,
@@ -84,6 +89,22 @@ function prepareCCText() {
 		ccText = "e-mail: " + emailInDesc + "\n\n" + ccText;
 
 	$("textarea#coverLetterText").val(ccText);
+
+	jQuery.ajax({
+
+		url: 'http://localhost:3000/',
+		data: {
+			companyName: companyName,
+			jobTitle: jobTitle,
+			contactName: contactName,
+			url: document.URL,
+			ccText: ccText			
+		},
+		crossDomain: true,
+		dataType: 'jsonp',
+		success: function() { alert("Success"); },
+		error: function() { alert("Failed!"); },
+	});
 }
 
 function prepareArchiveText() {
@@ -96,6 +117,9 @@ function prepareArchiveText() {
 }
 
 $(document).ready(function(){
+	if (document.URL === "http://dice.com/")
+		alert('DON\'T FORGET TO START SERVER!!!');
+
 	gatherData();
 	checkData();
 	prepareData();

@@ -1,0 +1,10 @@
+{
+	"name": "diceautomation-server",
+	"description": "Server for DiceAutomation Chrome Extension",
+	"version": "0.0.1",
+
+	"dependencies": {
+		"express": "~4.9.8",
+		"csv": "~0.4.0"
+	}
+}
