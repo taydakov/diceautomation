@@ -9,24 +9,24 @@ var archiveText = "<company name> (<position name>) - \"<contact name>\"\n<url>"
 // "I'm a great fit for the position \"<position title>\" because of my 4 years experience with web technologies including frontend and backend. I've got a lot of experience on server side with PHP stack and Apache+Nginx servers. Developed web apps using HTML5, CSS3, JavaScript with jQuery and MVC framework AngularJS, familiar with Chrome DevTools including profiler.\n\n" +
 // "I'm looking forward to add value to <company name>!";
 
-var servedCompanies = [
-	"SUPERMICRO COMPUTER INC",
-	"WinMax Systems Corporation",    // <- first serious contact
-	"Provide Commerce",
-	"Task Management Inc",
-	"Marsh Consulting Services",
-	"Samiti Technology Inc.",
-	"Ascent",
-	"Technosoft Engineering",
-	"Santa Cruz Biotechnology, Inc.",
-	"Global Infotech Corporation",
-	"Elti Solutions",                 // <- my favorite (russians are here)
-	"Spruce Technology Inc.",
-	"Adept Solutions Inc",
-	"MindWorld LLC",
-	"SMCI",
-	"Skyrocket Ventures",
-];
+// var servedCompanies = [
+// 	"SUPERMICRO COMPUTER INC",
+// 	"WinMax Systems Corporation",    // <- first serious contact
+// 	"Provide Commerce",
+// 	"Task Management Inc",
+// 	"Marsh Consulting Services",
+// 	"Samiti Technology Inc.",
+// 	"Ascent",
+// 	"Technosoft Engineering",
+// 	"Santa Cruz Biotechnology, Inc.",
+// 	"Global Infotech Corporation",
+// 	"Elti Solutions",                 // <- my favorite (russians are here)
+// 	"Spruce Technology Inc.",
+// 	"Adept Solutions Inc",
+// 	"MindWorld LLC",
+// 	"SMCI",
+// 	"Skyrocket Ventures",
+// ];
 
 var contactName,
 	jobTitle,
@@ -60,9 +60,9 @@ function checkData() {
 		return;
 	}
 
-	if ($.inArray(companyName, servedCompanies) != -1) {
-		alert("THIS COMPANY HAS ALREADY BEEN SERVED");
-	}
+	// if ($.inArray(companyName, servedCompanies) != -1) {
+	// 	alert("THIS COMPANY HAS ALREADY BEEN SERVED");
+	// }
 
 	// if (emailAvailable) {
 	// 	$("#jobInfo").click();
@@ -94,16 +94,16 @@ function prepareCCText() {
 
 		url: 'http://localhost:3000/',
 		data: {
+			website: 'dice.com',
+			resumeVer: '1.2',
 			companyName: companyName,
 			jobTitle: jobTitle,
 			contactName: contactName,
-			url: document.URL,
-			ccText: ccText			
+			// url: document.URL,
+			ccText: ccText	
 		},
 		crossDomain: true,
-		dataType: 'jsonp',
-		success: function() { alert("Success"); },
-		error: function() { alert("Failed!"); },
+		dataType: 'jsonp'
 	});
 }
 
@@ -124,5 +124,5 @@ $(document).ready(function(){
 	checkData();
 	prepareData();
 	prepareCCText();
-	prepareArchiveText();
+	// prepareArchiveText();
 });
