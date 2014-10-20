@@ -5,12 +5,13 @@ var express = require('express'),
 var app = express();
 var storage;
 
-fs.readFile('./data.csv', function(err, data) {
+fs.readFile('./data1.csv', function(err, data) {
 	if (err) return console.log(err);
 	csv.parse(data.toString(), function(err, data) {
 		if (err) return console.log(err);
 		storage = data;
-		console.log(storage[86][3]);
+		console.log(storage);
+		convertToJSArrayAndSaveToFile(storage, 3);
 	});
 });
 
@@ -44,8 +45,11 @@ app.get('/', function(req, res) {
 			req.query.companyName,
 			req.query.jobTitle,
 			0,
+			req.query.contactInfo,
 			req.query.ccText.replace(/\n/g, '\\n')
 		]);
+
+	convertToJSArrayAndSaveToFile(storage, 3);
 
 	csv.stringify(storage, function(err, strdata) {
 		if (err) return console.log(err);
@@ -60,3 +64,16 @@ app.get('/', function(req, res) {
 });
 
 app.listen(3000);
+
+function convertToJSArrayAndSaveToFile(array, index) {
+	var strData = "var companyNames = [\n";
+
+	for (var i = 0; i < array.length; i++)
+		strData += "\t\"" + array[i][index] + "\"" + ",\n";
+
+	strData += "];";
+
+	fs.writeFile('../companynames.js', strData, function(err) {
+		if (err) return console.log(err);
+	});
+}
